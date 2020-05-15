@@ -1,1 +1,47 @@
-<h1> Hello to my ruby app </h1>
+<header class="header">
+  <span></span>
+  <span>Tasks</span>
+  <button id="add-task-show">+</button>
+</header>
+
+<main class="container projects-container">
+  <div class="row">
+    <% @projects.each do |project| %>
+      <div class="project-card col-sm">
+        <div class="project-header">
+          <h3><%= project.title %></h3>
+        </div>
+        <div class="project-body">
+          <ul class="projects-todos">
+            <% project.tasks.all.each do |task| %>
+              <li>
+                <form autocomplete="off">
+                  <% if task.completed %>
+                    <input class="todo-check" type="checkbox" id=<%= "todo-check-#{task.id}"%> checked>
+                  <% else %>
+                    <input class="todo-check" type="checkbox" id=<%= "todo-check-#{task.id}"%>>
+                  <% end %>
+                  <label for=<%= "todo-check-#{task.id}"%>><%= task.title%></label>
+                </form>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</main>
+
+<div class="add-task-container">
+  <div class="form">
+    <h3>Новая задача</h3>
+    <select id="add-task-select-project">
+      <% @projects.each do |project| %>
+        <option value=<%= project.title %>><%= project.title %></option>
+      <% end %>
+    </select>
+    <input type="text" id="add-task-title">
+    <button type="button" id="add-task-submit">Отправить</button>
+    <button type="button" id="add-task-cancel">Отмена</button>
+  </div>
+</div>

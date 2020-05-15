@@ -1,5 +1,11 @@
 {
   "name": "oblakoapp",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "@rails/webpacker": "5.1.1",
+    "bootstrap-4-grid": "^3.4.0"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3.11.0"
+  }
 }

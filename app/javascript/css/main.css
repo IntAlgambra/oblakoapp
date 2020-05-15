@@ -1,0 +1,99 @@
+/* установка шрифтов */
+@font-face {
+    font-family: OpenSans;
+    src: url('../fonts/OpenSans-Regular.ttf');
+}
+@font-face {
+    font-family: OpenSans;
+    src: url('../fonts/OpenSans-Semibold.ttf');
+    font-weight: bold;
+}
+@font-face {
+    font-family: OpenSans;
+    src: url('../fonts/OpenSans-Light.ttf');
+    font-weight: lighter;
+}
+
+/* Сброс стандартных стилей */
+
+body {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    background-color: #F8F8F8;
+    font-family: OpenSans;
+}
+
+h1, h2, h3, h4, h5, p {
+    margin: 0;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    background-color: transparent;
+    border: 0;
+    padding: 10px;
+    cursor: pointer;
+}
+
+/* переопределение стилей бутстрапа */
+
+.col-sm {
+    padding: 0;
+}
+
+
+/* наши стили */
+
+.header {
+    display: flex;
+    align-items: center;
+    background-color: #3AAFDA;
+    justify-content: space-between;
+    height: 60px;
+    color: #fff;
+}
+
+.header span {
+    font-size: 1.5rem;
+
+}
+
+#add-task-show {
+    font-size: 2rem;
+    color: #fff;
+
+}
+
+.project-card {
+    margin-top: 50px;
+    border: 1px solid grey;
+}
+
+.project-header {
+    padding: 10px;
+    border-bottom: 1px solid darkgrey;
+    text-transform: uppercase;
+}
+
+.project-body {
+    padding: 10px;
+}
+
+.crossed-out {
+    text-decoration: line-through;
+}
