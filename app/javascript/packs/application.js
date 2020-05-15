@@ -22,54 +22,81 @@ import 'bootstrap-4-grid/css/grid.min.css'
 
 import '../css/main.css'
 
-const csrf = document.querySelector('meta[name="csrf-token"]').content;
+import 'pretty-checkbox/src/pretty-checkbox.scss'
 
-async function updateTask(id) {
-    const response = await fetch(`/api/task/${id}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-Token': csrf
-          },
-    })
-    console.log(response.status)
+class App {
+
+    //let's declare all stuff we need in our app (like buttons, inputs etc)
+    constructor() {
+        this.csrf = document.querySelector('meta[name="csrf-token"]').content;
+        this.addTaskShowButton = document.querySelector('#add-task-show');
+        this.addTaskHideButton = document.querySelector('#add-task-cancel')
+        this.checkboxes = document.querySelectorAll('.todo-check');
+        this.addTaskButton = document.querySelector('#add-task-submit');
+    }
+
+    //it this method we add all required event listeners
+    mount() {
+        //update task if checbox is changed
+        this.checkboxes.forEach((checkbox) => {
+            checkbox.addEventListener('click', (e) => {
+                const id = e.target.id.split('-')[2];
+                this.updateTask(id)
+                const label = e.target.nextElementSibling.querySelector('label');
+                label.classList.toggle('crossed-out')
+            })
+        })
+
+        //show add task form
+        this.addTaskShowButton.addEventListener('click', () => {
+            document.querySelector('.add-task-container').classList.remove('d-none')
+        })
+
+        //hide add task form
+        this.addTaskHideButton.addEventListener('click', () => {
+            document.querySelector('.add-task-container').classList.add('d-none')
+        })
+
+        //add new task
+        this.addTaskButton.addEventListener('click', () => {this.addTask()})
+
+    }
+
+    //this method updates task
+    async updateTask(id) {
+        const response = await fetch(`/api/task/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': this.csrf
+              },
+        })
+    }
+
+    async addTask() {
+        const project = document.querySelector('#add-task-select-project').value
+        const title = document.querySelector('#add-task-title').value
+        const data = {
+            project,
+            title
+        }
+        const response = await fetch('/api/tasks', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': this.csrf
+              },
+            body: JSON.stringify(data)
+        })
+
+        console.log(response.status)
+        document.querySelector('.add-task-container').classList.add('d-none')
+        document.location.reload(true)
+    }
 }
 
-const checkboxes = document.querySelectorAll('.todo-check');
-
-checkboxes.forEach((checkbox) => {
-    checkbox.addEventListener('click', (e) => {
-        const id = e.target.id.split('-')[2];
-        console.log(id)
-        updateTask(id)
-    })
+document.addEventListener("DOMContentLoaded", () => {
+    const app = new App();
+    app.mount()
 })
 
-async function getData() {
-    const response = await fetch('/api/tasks');
-    const data = await response.json()
-}
-
-async function addTask() {
-    const project = document.querySelector('#add-task-select-project').value
-    const title = document.querySelector('#add-task-title').value
-    console.log(project, title)
-    const data = {
-        project,
-        title
-    }
-    const response = await fetch('/api/tasks', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-Token': csrf
-          },
-        body: JSON.stringify(data)
-    })
-
-    console.log(response.status)
-}
-
-const addTaskButton = document.querySelector('#add-task-submit');
-
-addTaskButton.addEventListener('click', addTask)

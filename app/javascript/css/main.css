@@ -15,6 +15,9 @@
 }
 
 /* Сброс стандартных стилей */
+* {
+    box-sizing: border-box;
+}
 
 body {
     padding: 0;
@@ -50,12 +53,14 @@ button {
     cursor: pointer;
 }
 
-/* переопределение стилей бутстрапа */
-
-.col-sm {
-    padding: 0;
+/* утилитарные стили */
+.d-none {
+    display: none;
 }
 
+.crossed-out {
+    text-decoration: line-through;
+}
 
 /* наши стили */
 
@@ -79,14 +84,18 @@ button {
 
 }
 
-.project-card {
+.project-col {
     margin-top: 50px;
-    border: 1px solid grey;
+}
+
+.project-card {
+    height: 100%;
+    box-shadow: 0px 0px 15px -5px #878787;;
 }
 
 .project-header {
     padding: 10px;
-    border-bottom: 1px solid darkgrey;
+    border-bottom: 1px solid #878787;
     text-transform: uppercase;
 }
 
@@ -94,6 +103,91 @@ button {
     padding: 10px;
 }
 
-.crossed-out {
-    text-decoration: line-through;
+/* styles for add task form */
+
+.add-task-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-task-form {
+    background-color: #fff;
+    border-radius: 5px;
+    min-width: 30%;
+    display: flex;
+    flex-direction: column;
+}
+
+.add-task-form-header {
+    padding: 10px;
+    border-bottom: 1px solid #878787;
+}
+
+.add-task-form-body {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+#add-task-select-project {
+    margin-bottom: 10px;
+    height: 40px;
+    padding: 5px;
+    color: #878787;
+}
+
+#add-task-title {
+    margin-bottom: 10px;
+    height: 40px;
+    padding: 5px;
+    /* color: #878787; */
+}
+
+.form-buttons-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.form-buttons-container button {
+    width: 45%;
+    text-transform: uppercase;
+}
+
+#add-task-submit {
+    background-color: #3AAFDA;
+    color: #fff;
+}
+
+#add-task-submit:hover {
+    background-color: rgb(37, 112, 139);
+    color: #fff;
+}
+
+#add-task-submit:active {
+    background-color: #3AAFDA;
+    color: #fff;
+}
+
+#add-task-cancel {
+    background-color: #878787;
+    color: #fff;
+}
+
+#add-task-cancel:hover {
+    background-color: #3d3d3d;
+    color: #fff;
+}
+
+#add-task-cancel:active {
+    background-color: #878787;
+    color: #fff;
 }
